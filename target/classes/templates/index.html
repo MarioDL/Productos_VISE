@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<!-- JQuery 3.6.4 webjar-->
+		<script type="text/javascript" src="/webjars/jquery/3.6.4/dist/jquery.js"></script>
+		
+		<!-- Bootstrap 5.3.0 webjars-->
+		<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/5.3.0-alpha1/dist/css/bootstrap.min.css" />
+		<script type="text/javascript" src="/webjars/bootstrap/5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+		
+		<!-- Bootstrap icons 1.10.3 webjar-->
+		<link rel="stylesheet" type="text/css" href="/webjars/bootstrap-icons/1.10.3/font/bootstrap-icons.css" />
+		
+		<!-- Datatables -->
+		<link href="https://cdn.datatables.net/v/dt/dt-1.13.3/datatables.min.css" rel="stylesheet"/>
+		<script src="https://cdn.datatables.net/v/dt/dt-1.13.3/datatables.min.js"></script>
+		
+		<!-- Sweet Alerts -->
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
+		<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css" rel="stylesheet">
+		   
+		<script th:src="@{static/index.js}"></script>
+		
+		<title>Administración de Productos</title>
+	</head>
+	<body>
+		<span id="lang" th:text="#{lang.selected}" hidden></span>
+		<div class="container">
+			<div align="center">
+				<h1 th:text="#{Title}"></h1>
+		    	<button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addProducto"><i class="bi bi-plus-circle"></i> Crear Nuevo Producto</button>
+			</div>
+		    <br/><br/>
+		    <div class="row">
+		    	<div class="col-sm-3">
+			    	<div class="input-group mb-3">
+						<span class="input-group-text" id="inputGroup-sizing-default">Marca</span>
+					  	<input type="text" class="form-control" id="searchMarca" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+					  	<button type="button" class="btn btn-primary" id="btnBuscarMarca"><i class="bi bi-search"></i> Buscar</button>
+					</div>
+			    </div>
+			    <div class="col-sm-3">
+			    	<div class="input-group mb-3">
+			    		<input class="form-check-input" type="checkbox" value="" id="searchPrecioMayor">
+			    		&nbsp;&nbsp;
+						<label class="form-check-label" for="flexCheckDefault">Ordenar por precio mayor</label>
+			    	</div>
+			    </div>
+			    <div class="col-sm-6">
+			    	<div class="d-flex justify-content-end mb-3">
+			    		<span th:text="#{lang.change}"></span>
+						<select class="form-select bd-highlight" id="idiomas">
+						    <option value="en" th:text="#{lang.en}"></option>
+						    <option value="es" th:text="#{lang.es}"></option>
+						</select>
+						
+			    	</div>
+			    </div>
+		    </div>
+		    <div class="form-group" align="center">
+			    <table id="table1" class="display">
+			        <thead>
+			            <tr class="text-align-center">
+			                <th>Clave del Producto</th>
+			                <th>Nombre</th>
+			                <th>Marca</th>
+			                <th>Hecho En</th>
+			                <th>Precio</th>
+			                <th>Acciones</th>
+			                
+			            </tr>
+			        </thead>
+			    </table>
+		    </div>
+		    
+		</div>
+		
+		<!-- Modal addProducto -->
+		<div class="modal fade modal-lg" id="addProducto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h1 class="modal-title fs-5" id="staticBackdropLabel">Crear Nuevo Producto</h1>
+		      </div>
+		      <div class="modal-body">
+		        <div align="center">
+			        <div class="form-group">
+			        	<div class="mb-3 row">
+			        		<label for="nombre" class="col-sm-2 col-form-label">Nombre:</label>
+						    <div class="col-sm-10">
+						    	<input type="text" class="form-control" id="addNombre">
+						    </div>
+					  	</div>
+					  	<div class="mb-3 row">
+			        		<label for="marca" class="col-sm-2 col-form-label">Marca:</label>
+						    <div class="col-sm-10">
+						    	<input type="text" class="form-control" id="addMarca">
+						    </div>
+					  	</div>
+					  	<div class="mb-3 row">
+			        		<label for="hechoen" class="col-sm-2 col-form-label">Hecho en:</label>
+						    <div class="col-sm-10">
+						    	<input type="text" class="form-control" id="addHechoEn">
+						    </div>
+					  	</div>
+					  	<div class="mb-3 row">
+			        		<label for="precio" class="col-sm-2 col-form-label">Precio:</label>
+						    <div class="col-sm-10">
+						    	<input type="text" class="form-control" id="addPrecio">
+						    </div>
+					  	</div>
+			        </div>
+			    </div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-danger" id="btnCloseAgregarProducto"><i class="bi bi-x-square"></i> Cancelar</button>
+		        <button type="button" class="btn btn-success" id="btnAgregarProducto"><i class="bi bi-plus-circle"></i> Agregar</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
+		<!-- Modal editProducto -->
+		<div class="modal fade modal-lg" id="editProducto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h1 class="modal-title fs-5" id="staticBackdropLabel">Editar Producto</h1>
+		      </div>
+		      <div class="modal-body">
+		        <div align="center">
+			        <div class="form-group">
+			        	<div class="mb-3 row">
+			        		<label for="id" class="col-sm-2 col-form-label">ID Producto:</label>
+						    <div class="col-sm-10">
+						    	<input type="text" class="form-control" id="editId" readonly="readonly">
+						    </div>
+					  	</div>
+			        	<div class="mb-3 row">
+			        		<label for="nombre" class="col-sm-2 col-form-label">Nombre:</label>
+						    <div class="col-sm-10">
+						    	<input type="text" class="form-control" id="editNombre">
+						    </div>
+					  	</div>
+					  	<div class="mb-3 row">
+			        		<label for="marca" class="col-sm-2 col-form-label">Marca:</label>
+						    <div class="col-sm-10">
+						    	<input type="text" class="form-control" id="editMarca">
+						    </div>
+					  	</div>
+					  	<div class="mb-3 row">
+			        		<label for="hechoen" class="col-sm-2 col-form-label">Hecho en:</label>
+						    <div class="col-sm-10">
+						    	<input type="text" class="form-control" id="editHechoEn">
+						    </div>
+					  	</div>
+					  	<div class="mb-3 row">
+			        		<label for="precio" class="col-sm-2 col-form-label">Precio:</label>
+						    <div class="col-sm-10">
+						    	<input type="text" class="form-control" id="editPrecio">
+						    </div>
+					  	</div>
+			        </div>
+			    </div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-danger" id="btnCloseEditarProducto"><i class="bi bi-x-square"></i> Cancelar</button>
+		        <button type="button" class="btn btn-primary" id="btnEditarProducto"><i class="bi bi-check-square"></i> Guardar</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+	</body>
+	
+</html>
