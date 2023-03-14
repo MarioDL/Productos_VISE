@@ -25,29 +25,29 @@
 		   
 		<script th:src="@{static/index.js}"></script>
 		
-		<title>Administración de Productos</title>
+		<title th:text="#{titlePage}"></title>
 	</head>
 	<body>
 		<span id="lang" th:text="#{lang.selected}" hidden></span>
 		<div class="container">
 			<div align="center">
 				<h1 th:text="#{Title}"></h1>
-		    	<button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addProducto"><i class="bi bi-plus-circle"></i> Crear Nuevo Producto</button>
+		    	<button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addProducto" th:text="#{buttonAdd}"><i class="bi bi-plus-circle"></i> </button>
 			</div>
 		    <br/><br/>
 		    <div class="row">
 		    	<div class="col-sm-3">
 			    	<div class="input-group mb-3">
-						<span class="input-group-text" id="inputGroup-sizing-default">Marca</span>
+						<span class="input-group-text" id="inputGroup-sizing-default" th:text="#{labelBrand}"></span>
 					  	<input type="text" class="form-control" id="searchMarca" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-					  	<button type="button" class="btn btn-primary" id="btnBuscarMarca"><i class="bi bi-search"></i> Buscar</button>
+					  	<button type="button" class="btn btn-primary" id="btnBuscarMarca" th:text="#{buttonBrand}"><i class="bi bi-search"></i> </button>
 					</div>
 			    </div>
 			    <div class="col-sm-3">
 			    	<div class="input-group mb-3">
 			    		<input class="form-check-input" type="checkbox" value="" id="searchPrecioMayor">
 			    		&nbsp;&nbsp;
-						<label class="form-check-label" for="flexCheckDefault">Ordenar por precio mayor</label>
+						<label class="form-check-label" for="flexCheckDefault" th:text="#{labelPrice}"></label>
 			    	</div>
 			    </div>
 			    <div class="col-sm-6">
@@ -65,12 +65,12 @@
 			    <table id="table1" class="display">
 			        <thead>
 			            <tr class="text-align-center">
-			                <th>Clave del Producto</th>
-			                <th>Nombre</th>
-			                <th>Marca</th>
-			                <th>Hecho En</th>
-			                <th>Precio</th>
-			                <th>Acciones</th>
+			                <th th:text="#{idProduct}"></th>
+			                <th th:text="#{nameProduct}"></th>
+			                <th th:text="#{brandProduct}"></th>
+			                <th th:text="#{madeInProduct}"></th>
+			                <th th:text="#{priceProduct}"></th>
+			                <th th:text="#{actionsProduct}"></th>
 			                
 			            </tr>
 			        </thead>
@@ -84,31 +84,31 @@
 		  <div class="modal-dialog">
 		    <div class="modal-content">
 		      <div class="modal-header">
-		        <h1 class="modal-title fs-5" id="staticBackdropLabel">Crear Nuevo Producto</h1>
+		        <h1 class="modal-title fs-5" id="staticBackdropLabel" th:text="#{titleNewProduct}"></h1>
 		      </div>
 		      <div class="modal-body">
 		        <div align="center">
 			        <div class="form-group">
 			        	<div class="mb-3 row">
-			        		<label for="nombre" class="col-sm-2 col-form-label">Nombre:</label>
+			        		<label for="nombre" class="col-sm-2 col-form-label" th:text="#{nameNewProduct}"></label>
 						    <div class="col-sm-10">
 						    	<input type="text" class="form-control" id="addNombre">
 						    </div>
 					  	</div>
 					  	<div class="mb-3 row">
-			        		<label for="marca" class="col-sm-2 col-form-label">Marca:</label>
+			        		<label for="marca" class="col-sm-2 col-form-label" th:text="#{brandNewProduct}"></label>
 						    <div class="col-sm-10">
 						    	<input type="text" class="form-control" id="addMarca">
 						    </div>
 					  	</div>
 					  	<div class="mb-3 row">
-			        		<label for="hechoen" class="col-sm-2 col-form-label">Hecho en:</label>
+			        		<label for="hechoen" class="col-sm-2 col-form-label" th:text="#{madeInNewProduct}"></label>
 						    <div class="col-sm-10">
 						    	<input type="text" class="form-control" id="addHechoEn">
 						    </div>
 					  	</div>
 					  	<div class="mb-3 row">
-			        		<label for="precio" class="col-sm-2 col-form-label">Precio:</label>
+			        		<label for="precio" class="col-sm-2 col-form-label" th:text="#{priceNewProduct}"></label>
 						    <div class="col-sm-10">
 						    	<input type="text" class="form-control" id="addPrecio">
 						    </div>
@@ -117,8 +117,8 @@
 			    </div>
 		      </div>
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-danger" id="btnCloseAgregarProducto"><i class="bi bi-x-square"></i> Cancelar</button>
-		        <button type="button" class="btn btn-success" id="btnAgregarProducto"><i class="bi bi-plus-circle"></i> Agregar</button>
+		        <button type="button" class="btn btn-danger" id="btnCloseAgregarProducto" th:text="#{buttonCancelNewProduct}"><i class="bi bi-x-square"></i> </button>
+		        <button type="button" class="btn btn-success" id="btnAgregarProducto" th:text="#{buttonAddNewProduct}"><i class="bi bi-plus-circle"></i> </button>
 		      </div>
 		    </div>
 		  </div>
@@ -129,37 +129,37 @@
 		  <div class="modal-dialog">
 		    <div class="modal-content">
 		      <div class="modal-header">
-		        <h1 class="modal-title fs-5" id="staticBackdropLabel">Editar Producto</h1>
+		        <h1 class="modal-title fs-5" id="staticBackdropLabel" th:text="#{titleEditProduct}"></h1>
 		      </div>
 		      <div class="modal-body">
 		        <div align="center">
 			        <div class="form-group">
 			        	<div class="mb-3 row">
-			        		<label for="id" class="col-sm-2 col-form-label">ID Producto:</label>
+			        		<label for="id" class="col-sm-2 col-form-label" th:text="#{idProductEditProduct}"></label>
 						    <div class="col-sm-10">
 						    	<input type="text" class="form-control" id="editId" readonly="readonly">
 						    </div>
 					  	</div>
 			        	<div class="mb-3 row">
-			        		<label for="nombre" class="col-sm-2 col-form-label">Nombre:</label>
+			        		<label for="nombre" class="col-sm-2 col-form-label" th:text="#{nameEditProduct}"></label>
 						    <div class="col-sm-10">
 						    	<input type="text" class="form-control" id="editNombre">
 						    </div>
 					  	</div>
 					  	<div class="mb-3 row">
-			        		<label for="marca" class="col-sm-2 col-form-label">Marca:</label>
+			        		<label for="marca" class="col-sm-2 col-form-label" th:text="#{brandEditProduct}"></label>
 						    <div class="col-sm-10">
 						    	<input type="text" class="form-control" id="editMarca">
 						    </div>
 					  	</div>
 					  	<div class="mb-3 row">
-			        		<label for="hechoen" class="col-sm-2 col-form-label">Hecho en:</label>
+			        		<label for="hechoen" class="col-sm-2 col-form-label" th:text="#{madeInEditProduct}"></label>
 						    <div class="col-sm-10">
 						    	<input type="text" class="form-control" id="editHechoEn">
 						    </div>
 					  	</div>
 					  	<div class="mb-3 row">
-			        		<label for="precio" class="col-sm-2 col-form-label">Precio:</label>
+			        		<label for="precio" class="col-sm-2 col-form-label" th:text="#{priceEditProduct}"></label>
 						    <div class="col-sm-10">
 						    	<input type="text" class="form-control" id="editPrecio">
 						    </div>
@@ -168,8 +168,8 @@
 			    </div>
 		      </div>
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-danger" id="btnCloseEditarProducto"><i class="bi bi-x-square"></i> Cancelar</button>
-		        <button type="button" class="btn btn-primary" id="btnEditarProducto"><i class="bi bi-check-square"></i> Guardar</button>
+		        <button type="button" class="btn btn-danger" id="btnCloseEditarProducto" th:text="#{buttonCancelEditProduct}"><i class="bi bi-x-square"></i> </button>
+		        <button type="button" class="btn btn-primary" id="btnEditarProducto" th:text="#{buttonSaveEditProduct}"><i class="bi bi-check-square"></i> </button>
 		      </div>
 		    </div>
 		  </div>

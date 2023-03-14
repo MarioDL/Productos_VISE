@@ -335,7 +335,7 @@ $(document).ready(function () {
 	                "className": "text-center",
 	                'render': function(data, type, row, meta) 
 	                { 
-	                    data ="<button class='btn btn-primary btn-sm' data-bs-toggle='modal' data-bs-target='#editProducto' id='btnEdit'><i class='bi bi-pencil-square'></i> Editar</button>&nbsp;&nbsp;&nbsp;<button class='btn btn-danger btn-sm' id='btnDelete'><i class='bi bi-trash3'></i> Eliminar</button>" 
+	                    data ="<button class='btn btn-primary btn-sm' data-bs-toggle='modal' data-bs-target='#editProducto' id='btnEdit' th:text='#{buttonEdit}'><i class='bi bi-pencil-square'></i> </button>&nbsp;&nbsp;&nbsp;<button class='btn btn-danger btn-sm' id='btnDelete' th:text='#{buttonDelete}'><i class='bi bi-trash3'></i> </button>" 
 	                    return data;
 	                }
             	},

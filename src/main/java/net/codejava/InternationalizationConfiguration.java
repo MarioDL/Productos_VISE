@@ -15,11 +15,10 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 @Configuration
-@EnableWebMvc
 public class InternationalizationConfiguration implements WebMvcConfigurer{
 	
 	@Bean
-	public LocaleResolver localeResolver1() {
+	public LocaleResolver localeResolver() {
 	    SessionLocaleResolver slr = new SessionLocaleResolver();
 	    slr.setDefaultLocale(new Locale("es"));
 	    return slr;
