@@ -123,35 +123,21 @@ $(document).ready(function () {
 		.then(data => {
 			if(data == true) {
 				$("#addProducto").modal('hide')
-				if(lenguaje == 'es') {
-					Swal.fire({
-						icon: 'success',
-					  	title: 'Producto guardado correctamente'
-				  	})
-				}
-				else if(lenguaje == 'en') {
-					Swal.fire({
-						icon: 'success',
-					  	title: 'Product saved successfully'
-				  	})
-				}
+				var productSaved = $('#productSaved').text()
+				Swal.fire({
+					icon: 'success',
+				  	title: productSaved
+			  	})
 				getProductos()
 			}
 			else {
-				if(lenguaje == 'es') {
-					Swal.fire({
-					  icon: 'error',
-					  title: 'Error al guardar el producto',
-					  text: 'Verifique que ingreso toda la información correctamente e intente de nuevo'
-					})
-				}
-				else if(lenguaje == 'en') {
-					Swal.fire({
-					  icon: 'error',
-					  title: 'Error saving product',
-					  text: 'Verify that you entered all the information correctly and try again'
-					})
-				}
+				var productNotSavedError = $('#productNotSavedError').text()
+				var productNotSavedDescription = $('#productNotSavedDescription').text()
+				Swal.fire({
+				  icon: 'error',
+				  title: productNotSavedError,
+				  text: productNotSavedDescription
+				})
 			}
 			
 		});
@@ -181,66 +167,40 @@ $(document).ready(function () {
 		.then(data => {
 			if(data == true) {
 				$("#editProducto").modal('hide')
-				if(lenguaje == 'es') {
-					Swal.fire({
-						icon: 'success',
-					  	title: 'Producto editado correctamente'
-				  	})
-				}
-				else if(lenguaje == 'en') {
-					Swal.fire({
-						icon: 'success',
-					  	title: 'Product edited successfully'
-				  	})
-				}
+				var productEdited = $('#productEdited').text()
+				Swal.fire({
+					icon: 'success',
+				  	title: productEdited
+			  	})
 				
 				getProductos()
 			}
 			else {
-				if(lenguaje == 'es') {
-					Swal.fire({
-					  icon: 'error',
-					  title: 'Error al editar el producto',
-					  text: 'Verifique que ingreso toda la información correctamente e intente de nuevo'
-					})
-				}
-				else if(lenguaje == 'en') {
-					Swal.fire({
-					  icon: 'error',
-					  title: 'Error editing the product',
-					  text: 'Verify that you entered all the information correctly and try again'
-					})
-				}
+				var productNotEditedError = $('#productNotEditedError').text()
+				var productNotEditedDescription = $('#productNotEditedDescription').text()
+				Swal.fire({
+				  icon: 'error',
+				  title: productNotEditedError,
+				  text: productNotEditedDescription
+				})
 			}
 			
 		});
 	}
 	
 	function deleteProducto() {
-		var confirmacion
-		if(lenguaje == 'es') {
-			confirmacion = Swal.fire({
-			  title: '¿Desea realmente eliminar el producto?',
-			  icon: 'warning',
-			  showCancelButton: true,
-			  confirmButtonColor: '#198754',
-			  cancelButtonColor: '#d33',
-			  confirmButtonText: 'Confirmar',
-			  cancelButtonText: 'Cancelar'
-			})
-		}
-		else if(lenguaje == 'en') {
-			confirmacion = Swal.fire({
-			  title: 'Do you really want to delete the product?',
-			  icon: 'warning',
-			  showCancelButton: true,
-			  confirmButtonColor: '#198754',
-			  cancelButtonColor: '#d33',
-			  confirmButtonText: 'Confirm',
-			  cancelButtonText: 'Cancel'
-			})
-		}
-		confirmacion.then((result) => {
+		var productDeletedConfirmation = $('#productDeletedConfirmation').text()
+		var productDeletedAccept = $('#productDeletedAccept').text()
+		var productDeletedCancel = $('#productDeletedCancel').text()
+		Swal.fire({
+		  title: productDeletedConfirmation,
+		  icon: 'warning',
+		  showCancelButton: true,
+		  confirmButtonColor: '#198754',
+		  cancelButtonColor: '#d33',
+		  confirmButtonText: productDeletedAccept,
+		  cancelButtonText: productDeletedCancel
+		}).then((result) => {
 		  if (result.isConfirmed) {
 			var id = parseInt(datos_tableProductos.id)
 			var urlDelete = urlApi + '/delete/'+id
@@ -254,37 +214,23 @@ $(document).ready(function () {
 			.then(response => response.json() )
 			.then(data => {
 				if(data == true) {
-					if(lenguaje == 'es') {
-						Swal.fire(
-							'Producto eliminado',
-							'El producto ha sido eliminado',
-							'success'
-					    )
-					}
-					else if(lenguaje == 'en') {
-						Swal.fire(
-							'Product removed',
-							'The product has been removed',
-							'success'
-					    )
-					}
+					var productDeletedSuccess = $('#productDeletedSuccess').text()
+					var productDeletedDescription = $('#productDeletedDescription').text()
+					Swal.fire(
+						productDeletedSuccess,
+						productDeletedDescription,
+						'success'
+				    )
 					getProductos()
 				}
 				else {
-					if(lenguaje == 'es') {
-						Swal.fire({
-						  icon: 'error',
-						  title: 'Error al eliminar el producto',
-						  text: 'Ocurrió un error inesperado'
-						})
-					}
-					else if(lenguaje == 'en') {
-						Swal.fire({
-						  icon: 'error',
-						  title: 'Error deleting the product',
-						  text: 'An unexpected error occurred'
-						})
-					}
+					var productDeletedError = $('#productDeletedError').text()
+					var productDeletedErrorDescription = $('#productDeletedErrorDescription').text()
+					Swal.fire({
+					  icon: 'error',
+					  title: productDeletedError,
+					  text: productDeletedErrorDescription
+					})
 				}
 				
 			});
@@ -346,20 +292,13 @@ $(document).ready(function () {
 	}
 	
 	function alertaValidaCamposAdd() {
-		if(lenguaje == 'es') {
-			Swal.fire({
-				icon: 'error',
-				title: 'Es necesario llenar todos los campos para guardar el producto',
-				confirmButtonText: 'Aceptar',
-			})
-		}
-		else if(lenguaje == 'en') {
-			Swal.fire({
-				icon: 'error',
-				title: 'It is necessary to fill in all the fields to save the product',
-				confirmButtonText: 'Accept',
-			})
-		}
+		var emptyFieldAdd = $('#emptyFieldAdd').text()
+		var emptyFieldAddAccept = $('#emptyFieldAddAccept').text()
+		Swal.fire({
+			icon: 'error',
+			title: emptyFieldAdd,
+			confirmButtonText: emptyFieldAddAccept,
+		})
 	}
 	
 	function validarCamposEdit() {
@@ -386,20 +325,13 @@ $(document).ready(function () {
 	}
 	
 	function alertaValidaCamposEdit() {
-		if(lenguaje == 'es') {
-			Swal.fire({
-				icon: 'error',
-				title: 'Es necesario llenar todos los campos para editar el producto',
-				confirmButtonText: 'Aceptar',
-			})
-		}
-		else if(lenguaje == 'en') {
-			Swal.fire({
-				icon: 'error',
-				title: 'It is necessary to fill in all the fields to edit the product',
-				confirmButtonText: 'Accept',
-			})
-		}
+		var emptyFieldEdit = $('#emptyFieldEdit').text()
+		var emptyFieldEditAccept = $('#emptyFieldEditAccept').text()
+		Swal.fire({
+			icon: 'error',
+			title: emptyFieldEdit,
+			confirmButtonText: emptyFieldEditAccept,
+		})
 	}
 	
 	function llenarTablaProductos(data) {
